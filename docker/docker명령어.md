@@ -63,7 +63,7 @@ $ docker rm $(docker ps -qa)
 ```
 
 ### docker 이미지 모두 삭제하기
-요것도 가상머신에서 용량이 부족하다고 뜰때 
+요것도 가상머신에서 용량이 부족하다고 뜰때
 ```
 $ docker rmi $(docker images -qa)
 ```
@@ -99,3 +99,15 @@ docker run --link="db:db" image명
 docker run -d -p 8080:80 -v /home/user/www:/var/www -e PHP_ERROR_REPORTING='E_ALL & ~E_STRICT'
 ```
 
+### 도커 이미지 의존성 그림으로 보기
+
+**참고**
+
+https://speakerdeck.com/bmorearty/15-docker-tips-in-5-minutes
+
+
+```
+$ docker images -viz | dot -Tpng -o docker.png
+$ python -m SimpleHTTPServer
+(on browser) http://machineip:8000/docker.png
+```
