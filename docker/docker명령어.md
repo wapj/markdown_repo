@@ -37,16 +37,20 @@ $ curl -fsSL https://get.docker.com/ | sh
 $ sudo service docker start
 ```
 
-### 도커설치 윈도우, OSX
-
 
 ### docker 실행시 관리자 권한으로 실행되게 하기
-매번 실행할때마다 sudo 넣는게 귀찮은 사람은 실행하면 좋다. (ubuntu에서는 잘되는데 cent에서는 잘 안됨!)
+매번 실행할때마다 sudo 넣는게 귀찮은 사람은 실행하면 좋다.
+
 
 ```
 $ sudo usermod -aG docker ${USER}
 $ sudo service docker restart
+### 잘되는지 테스트
+$ docker run hello-world
 ```
+
+`docker run hello-world`실행시 에러가 나는 경우는 서버를 재시작해야한다.
+
 
 ### docker 프로세스 모두 죽이기
 
@@ -110,4 +114,17 @@ https://speakerdeck.com/bmorearty/15-docker-tips-in-5-minutes
 $ docker images -viz | dot -Tpng -o docker.png
 $ python -m SimpleHTTPServer
 (on browser) http://machineip:8000/docker.png
+```
+
+### 도커 레지스트리 설치 및 실행
+
+설치
+```
+$ docker pull registry:latest
+```
+
+실행
+
+```
+$ docker run -d -p 5000:5000 --name my-registry -v /tmp/registry:/tmp/registry registry
 ```
